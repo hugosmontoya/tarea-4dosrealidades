@@ -1,41 +1,61 @@
-# Dos realidades
+# Dos Realidades — Maquiavelo: La Máscara de la Felicidad
 
-Ejercicio 02 del curso (DPPI 2026), sobre visión artificial y representación. La idea era tomar una sola cámara y usarla para armar dos maneras completamente distintas de "ver" lo mismo.
+> *«Todos ven lo que aparentas ser, pero pocos ven lo que realmente eres.»*  
+> — **Nicolás Maquiavelo**, *El Príncipe* (Cap. XVIII, 1532)
 
-**Demo:** https://fefeliperoar.github.io/dos-realidades/
-**Repo:** https://github.com/fefeliperoar/dos-realidades
+Ejercicio de visión artificial y representación para el curso **Dispositivos Periféricos y Programación Interactiva (DPPI)**.
+
+* **Demo en vivo (GitHub Pages):** https://hugosmontoya.github.io/tarea-4dosrealidades/
+* **Repositorio:** https://github.com/hugosmontoya/tarea-4dosrealidades
+
+---
 
 ## De qué se trata
 
-Hay dos sistemas corriendo al mismo tiempo, con la misma cámara. Ninguno de los dos muestra la imagen de la cámara tal cual — cada uno se queda solo con el dato que le importa y lo dibuja a su manera. Por eso terminan pareciendo dos cosas distintas aunque estén mirando lo mismo.
+Frente a una misma cámara web ocurre una sola escena: el rostro humano. Sin embargo, dos sistemas computacionales construyen dos verdades opuestas en tiempo real, materializando la paradoja maquiavélica entre la máscara social y la verdad física despojada:
 
-**Sistema A — Visión Corporal.** Usa MediaPipe para encontrar los puntos del cuerpo de la persona (hombros, codos, caderas, rodillas, etc.) en cada frame. En vez de mostrar esos puntos tal cual, se dibujan conectados por líneas curvas que se mueven levemente solas, como si fueran un tejido vivo en lugar de un esqueleto rígido. Cada zona del cuerpo (cabeza, torso, brazos, piernas) tiene su propio color, y los puntos se ven más grandes o más chicos según qué tan segura está la detección y qué tan cerca está esa parte del cuerpo de la cámara. Si no hay nadie en cuadro, en el centro aparecen unos anillos suaves pulsando, como si el sistema estuviera "buscando" un cuerpo.
+### Sistema A — «Lo que quieres que vean» (MediaPipe)
+* **Tecnología:** MediaPipe Face Landmarker (`@mediapipe/tasks-vision`) con análisis de *blendshapes* faciales y WebAssembly.
+* **Qué busca:** Reconoce la fisonomía del rostro y evalúa en vivo las microexpresiones de **sonrisa y felicidad proyectada** (`mouthSmileLeft`, `mouthSmileRight`).
+* **Representación:** Traza una máscara geométrica estilizada en tonos dorados con resplandor luminoso sobre los contornos faciales (ojos, cejas, labios y óvalo). Al sonreír, la barra de emoción se llena e ilumina el rostro, premiando el gesto positivo. Es la consagración técnica del **simulacro social**: la máquina cree y valida la fachada que tú decides proyectar al mundo exterior.
 
-**Sistema B — Movimiento.** Este no reconoce cuerpos ni nada en particular: solo compara cada frame con el anterior y se fija dónde cambió el brillo de la imagen. Donde detecta un cambio, nacen partículas — mientras más brusco fue el cambio, más partículas aparecen, más rápido se mueven y más grandes son. El color también cuenta algo: los cambios suaves se ven en tonos azules/violetas y los cambios bruscos en tonos naranjos. Las partículas se van apagando solas con el tiempo y dejan una especie de estela, en vez de desaparecer de golpe.
-
-## Cómo probarlo
-
-El `index.html` no se puede abrir directo con doble clic porque el script usa módulos de JS. Hay que levantar un servidor local desde la carpeta, por ejemplo:
-
-```
-python3 -m http.server 8000
-```
-
-y entrar a `http://localhost:8000`. Va a pedir permiso de cámara — hay que aceptarlo y apretar el botón "Cámara".
-
-## Reflexión
-
-Frente a la cámara ocurre una sola escena, pero cada sistema encuentra algo distinto en ella. Uno reconoce un cuerpo a través de puntos y relaciones; el otro simplemente observa dónde algo cambia. Ninguno está equivocado, pero ninguno puede verlo todo.
-
-Merleau-Ponty planteaba que nuestra percepción está ligada a las posibilidades y límites de nuestro cuerpo. Con las máquinas ocurre algo parecido: aquello que pueden percibir depende de cómo fueron construidas y de qué les enseñamos a buscar.
-
-Kosuth, por otro lado, nos permite recordar que una representación nunca es aquello que representa. Los puntos, las líneas y las huellas de movimiento hablan de una persona, pero no son esa persona.
-
-Tal vez lo interesante de construir una máquina que observa no sea preguntarnos cuánto puede ver, sino comenzar a reconocer todo aquello que, inevitablemente, deja fuera.
-
-## Tecnologías
-
-MediaPipe Pose Landmarker (cargado desde CDN) y Canvas 2D con JavaScript puro, sin frameworks ni build.
+### Sistema B — «Lo que realmente eres» (OpenCV.js)
+* **Tecnología:** OpenCV.js (`@techstark/opencv-js`) con binarización adaptativa gaussiana (`cv.adaptiveThreshold`).
+* **Qué busca:** Procesa la imagen a pantalla completa eliminando cualquier gradación de color o tonos grises: convierte la escena a **blanco o negro absoluto** (0 o 255).
+* **Representación:** En este lienzo, **la emoción humana se desintegra**. La sonrisa desaparece y se quiebra en cavidades oscuras y bloques ásperos de luz y sombra. Ciega a la psicología del gesto, la máquina despoja al individuo de su artificio cosmético: ante la óptica física, solo somos un volumen de materia obstruyendo y reflejando fotones.
 
 ---
-Felipe · Ejercicio 02 — Dos realidades · DPPI 2026
+
+## Reflexión Filosófica
+
+En el capítulo XVIII de *El Príncipe*, Nicolás Maquiavelo formula una de las observaciones más lúcidas sobre la condición humana: los hombres en general juzgan más por los ojos que por las manos, porque a todos les es dado ver, pero a muy pocos tocar y sentir lo que verdaderamente subyace. La vida en comunidad nos exige una constante diplomacia del semblante: proyectar serenidad, cordialidad y éxito; en definitiva, **mostrar a los demás lo que queremos que vean, y no lo que realmente somos**.
+
+Frente a una misma lente, esta obra enfrenta dos sistemas de visión computacional que encarnan de manera radical esta dualidad:
+
+**El Sistema A (MediaPipe) es la máquina de la apariencia social.** Dotado de un modelo de aprendizaje profundo entrenado con miles de rostros humanos, este algoritmo busca y recompensa la sonrisa. Identifica las comisuras de los labios, la contracción de los pómulos y la apertura de los párpados para cuantificar un porcentaje de «felicidad». El sistema dibuja una máscara luminosa, dorada y armónica que celebra el gesto positivo. Aunque por dentro la persona pueda estar atravesando dolor, tensión o incertidumbre, basta con forzar una leve curvatura en la boca para que el algoritmo certifique con entusiasmo que allí hay una persona «feliz». Es la consagración técnica del simulacro social: la máquina cree ciegamente en la fachada que tú decides proyectar.
+
+**El Sistema B (OpenCV), en cambio, es la máquina del despojo ontológico.** Desprovisto de toda psicología y ajeno a los códigos sociales, este algoritmo convierte la escena a un contraste binario absoluto de blanco y negro puro. En esta pantalla, la sonrisa pierde todo su significado: las comisuras se quiebran en bloques de sombras ásperas, los ojos se hunden en cavidades oscuras y la piel se vuelve un mapa implacable de zonas iluminadas o ensombrecidas. Aquí no hay simpatía, no hay calidez ni hay felicidad reconocible. Solo queda la verdad física de la escena: eres un cuerpo biológico obstruyendo y reflejando fotones en el espacio.
+
+Al contemplar ambas pantallas simultáneamente, se hace visible la paradoja que Maquiavelo vislumbró hace medio milenio: mientras todo el mundo se queda fascinado con la luz cálida de la sonrisa que mostramos en la primera pantalla, pocos son capaces de sostener la mirada sobre la segunda, donde somos simplemente luces y sombras luchando contra el vacío.
+
+---
+
+## Cómo probarlo localmente
+
+1. Ejecuta el archivo `iniciar_servidor.bat` (haciendo doble clic en Windows), o levanta un servidor HTTP local desde la terminal:
+   ```bash
+   python -m http.server 8000
+   ```
+2. Abre en tu navegador [http://localhost:8000](http://localhost:8000).
+3. Concede los permisos de cámara y haz clic en **«Activar Cámara»**.
+
+---
+
+## Tecnologías utilizadas
+
+* **MediaPipe Tasks Vision (Google):** Face Landmarker & Face Blendshapes (WASM / GPU delegate).
+* **OpenCV.js:** Procesamiento matricial de imágenes y binarización adaptativa en tiempo real.
+* **HTML5 Canvas 2D & JavaScript Vanilla:** Renderizado fluido a 60 FPS sin frameworks externos.
+
+---
+Hugo Montoya · Ejercicio Dos Realidades — DPPI

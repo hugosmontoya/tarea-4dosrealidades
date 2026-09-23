@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Dos realidades — Visión artificial</title>
-<meta name="description" content="Una misma cámara, dos sistemas de visión artificial construyendo representaciones distintas de la misma escena.">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Dos Realidades — Maquiavelo: La Máscara de la Felicidad</title>
+  <meta name="description" content="Una misma cámara. Dos realidades enfrentadas: el reconocimiento de felicidad de MediaPipe frente a la verdad binaria de luces y sombras de OpenCV.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="site-header">
-  <p class="eyebrow">EJERCICIO_02</p>
-  <h1>Dos realidades, todas las realidades</h1>
-  <p class="lede">Una misma cámara observa la escena. Dos sistemas de visión artificial la interpretan de maneras distintas, en tiempo real.</p>
+  <p class="eyebrow">VISIÓN ARTIFICIAL & FILOSOFÍA</p>
+  <h1>Dos Realidades</h1>
+  <blockquote class="quote">
+    «Todos ven lo que aparentas ser, pero pocos ven lo que realmente eres.»
+    <cite>— Nicolás Maquiavelo, <em>El Príncipe</em> (1532)</cite>
+  </blockquote>
+  <p class="lede">
+    Una sola cámara observa tu rostro. Dos sistemas computacionales construyen dos verdades opuestas: la máscara de la felicidad proyectada y la fría materia de luces y sombras.
+  </p>
 </header>
 
 <main>
@@ -20,67 +26,97 @@
   <section class="controls">
     <div class="btn-wrapper" id="cameraBtnWrapper">
       <button class="btn" id="startBtn" type="button">
-        <span class="btn-txt">Cámara</span>
-        <div class="dot pulse" id="cameraDot"></div>
+        <span class="btn-txt">Activar Cámara</span>
+        <div class="dot" id="cameraDot"></div>
       </button>
     </div>
     <p id="statusMsg" class="status" role="status" aria-live="polite">La cámara aún no está activa.</p>
   </section>
 
   <section class="stage" id="stage">
+    
+    <!-- SISTEMA A: MEDIAPIPE (LA MÁSCARA SOCIAL / FELICIDAD) -->
     <article class="panel" id="panelA">
       <div class="panel-head">
-        <h2>Sistema A — Visión Corporal</h2>
+        <span class="panel-tag tag-a">SISTEMA A · LA APARIENCIA</span>
+        <h2>Lo que quieres que vean</h2>
+        <p class="question">MediaPipe Face Landmarker · Reconocimiento de sonrisa y felicidad</p>
       </div>
+      
       <div class="canvas-wrap">
         <canvas id="canvasA" width="640" height="480"></canvas>
-        <p class="idle-hint" id="idleHintA">esperando cuerpo…</p>
+        <div class="overlay-badge" id="emotionBadge">
+          <span class="badge-icon">😊</span>
+          <span class="badge-text">Felicidad proyectada: <strong id="smilePercent">0%</strong></span>
+        </div>
+        <p class="idle-hint" id="idleHintA">esperando rostro…</p>
       </div>
-      <p class="caption">MediaPipe · <span id="statA">sin datos</span></p>
+
+      <div class="panel-footer">
+        <div class="meter-bar">
+          <div class="meter-fill" id="meterFill" style="width: 0%;"></div>
+        </div>
+        <p class="caption">Expresión detectada: <span id="statA">sin datos</span></p>
+      </div>
     </article>
 
+    <!-- SISTEMA B: OPENCV (LA REALIDAD CRUDA / BLANCO Y NEGRO) -->
     <article class="panel" id="panelB">
       <div class="panel-head">
-        <h2>Sistema B — Movimiento</h2>
+        <span class="panel-tag tag-b">SISTEMA B · LA REALIDAD</span>
+        <h2>Lo que realmente eres</h2>
+        <p class="question">OpenCV.js · Binarización pura sin grises (Luz y Sombra)</p>
       </div>
+
       <div class="canvas-wrap">
         <canvas id="canvasB" width="640" height="480"></canvas>
+        <p class="idle-hint" id="idleHintB" style="display: none;">cargando motor óptico…</p>
       </div>
-      <p class="caption">Diferencia de frames · <span id="statB">sin datos</span></p>
+
+      <div class="panel-footer">
+        <p class="caption">Materia óptica: <span id="statB">sin datos</span></p>
+        <p class="sub-caption">Donde la emoción humana se desvanece en bloques binarios.</p>
+      </div>
     </article>
+
   </section>
 
+  <!-- ENSAYO FILOSÓFICO DE MAQUIAVELO -->
   <section class="reflection-section">
-    <h2>Reflexión</h2>
-    <p>
-      Frente a la cámara ocurre una sola escena, pero cada sistema encuentra algo distinto en ella. Uno reconoce
-      un cuerpo a través de puntos y relaciones; el otro simplemente observa dónde algo cambia. Ninguno está
-      equivocado, pero ninguno puede verlo todo.
-    </p>
-    <p>
-      Merleau-Ponty planteaba que nuestra percepción está ligada a las posibilidades y límites de nuestro cuerpo.
-      Con las máquinas ocurre algo parecido: aquello que pueden percibir depende de cómo fueron construidas y de
-      qué les enseñamos a buscar.
-    </p>
-    <p>
-      Kosuth, por otro lado, nos permite recordar que una representación nunca es aquello que representa. Los
-      puntos, las líneas y las huellas de movimiento hablan de una persona, pero no son esa persona.
-    </p>
-    <p>
-      Tal vez lo interesante de construir una máquina que observa no sea preguntarnos cuánto puede ver, sino
-      comenzar a reconocer todo aquello que, inevitablemente, deja fuera.
-    </p>
+    <div class="reflection-header">
+      <span class="eyebrow">ENSAYO CONCEPTUAL</span>
+      <h2>La simulación de la dicha y el despojo de la sombra</h2>
+    </div>
+
+    <div class="reflection-content">
+      <p>
+        En el capítulo XVIII de <em>El Príncipe</em>, Nicolás Maquiavelo formula una de las observaciones más incisivas sobre la condición humana y el ejercicio del poder: los hombres en general juzgan más por los ojos que por las manos, porque a todos les es dado ver, pero a muy pocos tocar y sentir lo que verdaderamente subyace. La vida en comunidad nos exige una constante diplomacia del semblante: proyectar serenidad, cordialidad y éxito; en definitiva, <strong>mostrar a los demás lo que queremos que vean, y no lo que realmente somos</strong>.
+      </p>
+      <p>
+        Frente a una misma lente, esta obra enfrenta dos sistemas de visión computacional que encarnan de manera radical esta dualidad:
+      </p>
+      <p>
+        <strong>El Sistema A (MediaPipe) es la máquina de la apariencia social.</strong> Dotado de un modelo de aprendizaje profundo entrenado con miles de rostros humanos, este algoritmo busca y recompensa la sonrisa. Identifica las comisuras de los labios, la contracción de los pómulos y la apertura de los párpados para cuantificar un porcentaje de «felicidad». El sistema dibuja una máscara luminosa, dorada y armónica que celebra el gesto positivo. Aunque por dentro la persona pueda estar atravesando dolor, tensión o incertidumbre, basta con forzar una leve curvatura en la boca para que el algoritmo certifique con entusiasmo que allí hay una persona «feliz». Es la consagración técnica del simulacro social: la máquina cree ciegamente en la fachada que tú decides proyectar.
+      </p>
+      <p>
+        <strong>El Sistema B (OpenCV), en cambio, es la máquina del despojo ontológico.</strong> Desprovisto de toda psicología y ajeno a los códigos sociales, este algoritmo convierte la escena a un contraste binario absoluto de blanco y negro puro. En esta pantalla, la sonrisa pierde todo su significado: las comisuras se quiebran en bloques de sombras ásperas, los ojos se hunden en cavidades oscuras y la piel se vuelve un mapa implacable de zonas iluminadas o ensombrecidas. Aquí no hay simpatía, no hay calidez ni hay felicidad reconocible. Solo queda la verdad física de la escena: eres un cuerpo biológico obstruyendo y reflejando fotones en el espacio.
+      </p>
+      <p>
+        Al contemplar ambas pantallas simultáneamente, se hace visible la paradoja que Maquiavelo vislumbró hace medio milenio: mientras todo el mundo se queda fascinado con la luz cálida de la sonrisa que mostramos en la primera pantalla, pocos son capaces de sostener la mirada sobre la segunda, donde somos simplemente luces y sombras luchando contra el vacío.
+      </p>
+    </div>
   </section>
 
 </main>
 
 <footer class="site-footer">
-  <p>Código fuente: <a id="repoLink" href="https://github.com/fefeliperoar/dos-realidades" target="_blank" rel="noopener">repositorio en GitHub</a></p>
-  <p class="credit">Felipe Roa R. - Ejercicio 02 - DPPI 2026 - Escuela de Diseño UDP</p>
+  <p>Ejercicio de Visión Artificial & Filosofía · Inspirado en Nicolás Maquiavelo</p>
+  <p class="credit">Desarrollado con MediaPipe Tasks Vision & OpenCV.js</p>
 </footer>
 
+<!-- Elementos invisibles para el procesamiento -->
 <video id="video" playsinline autoplay muted></video>
-<canvas id="hiddenSample" width="48" height="36"></canvas>
+<canvas id="hiddenCv" width="320" height="240"></canvas>
 
 <script type="module" src="script.js"></script>
 </body>
